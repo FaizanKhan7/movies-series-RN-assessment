@@ -41,7 +41,7 @@ function TvShows({navigation}) {
                 movieName={series.original_name}
                 genre="Series"
                 year={moment(series.first_air_date).format('YYYY')}
-                imgSrc={series.poster_path}
+                imgSrc={`https://image.tmdb.org/t/p/original/${series.poster_path}`}
               />
             </View>
           );

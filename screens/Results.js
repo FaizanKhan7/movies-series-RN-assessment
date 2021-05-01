@@ -12,6 +12,7 @@ function Results({navigation}) {
 
   const handleChange = event => {
     setSearchTerm(event);
+    console.log(searchTerm);
   };
 
   useEffect(() => {
@@ -27,13 +28,13 @@ function Results({navigation}) {
         console.log('error', error);
       });
   }, []);
-  useEffect(() => {
-    const results = allData.filter(
-      movie => movie.original_title.indexOf(searchTerm) !== -1,
-    );
-    console.log(searchTerm);
-    setAllData(results);
-  }, [searchTerm]);
+  // useEffect(() => {
+  //   const results = allData.filter(
+  //     movie => movie.original_title.indexOf(searchTerm) !== -1,
+  //   );
+  //   console.log(searchTerm);
+  //   setAllData(results);
+  // }, [searchTerm]);
 
   return (
     <ScrollView>
@@ -61,7 +62,7 @@ function Results({navigation}) {
         return (
           <View key={movies.vote_count}>
             <ResultCards
-              imgSrc={movies.poster_path}
+              imgSrc={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
               movieName={movies.original_title}
               moviedesc="Action &#8226; Adventure &#8226; Drama"
               year={moment(movies.release_date).format('YYYY')}

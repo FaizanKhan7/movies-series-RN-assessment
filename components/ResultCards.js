@@ -10,7 +10,7 @@ function ResultCards({
   stars,
   duration,
 }) {
-  console.log(imgSrc);
+  // console.log(imgSrc);
   return (
     <View style={styles.movieWrapper}>
       <Image

@@ -38,7 +38,7 @@ function TopMovies({navigation}) {
           return (
             <View key={movies.id}>
               <ResultCards
-                imgSrc={movies.poster_path}
+                imgSrc={`https://image.tmdb.org/t/p/original/${movies.poster_path}`}
                 movieName={movies.title}
                 moviedesc="Action &#8226; Adventure &#8226; Drama"
                 year={moment(movies.release_date).format('YYYY')}
