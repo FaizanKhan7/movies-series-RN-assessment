@@ -8,12 +8,33 @@ import moment from 'moment';
 
 function Results({navigation}) {
   const [allData, setAllData] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+  // const [searchTerm, setSearchTerm] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchData, setSearchData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const handleChange = event => {
-    setSearchTerm(event);
-    console.log(searchTerm);
-  };
+  // const handleChange = event => {
+  //   setSearchTerm(event);
+  //   console.log(searchTerm);
+  // };
+  function searchMovie(text) {
+    if (text !== '') {
+      axios
+        .get(
+          'https://api.themoviedb.org/3/search/movie?api_key=8aa112291918d981bc0206b734023546&page=1' +
+            '&query=' +
+            text,
+        )
+        .then(response => {
+          console.log(response.data.results);
+          setSearchData(response.data.results);
+        })
+        .then(setLoading(true))
+        .catch(err => console.log(err));
+    } else {
+      setLoading(false);
+    }
+  }
 
   useEffect(() => {
     axios
@@ -53,26 +74,51 @@ function Results({navigation}) {
         <TextInput
           placeholder="Avengers"
           style={styles.input}
-          value={searchTerm}
-          onChangeText={handleChange}>
+          value={searchQuery}
+          onChangeText={text => {
+            setSearchQuery(text);
+            searchMovie(text);
+          }}>
           {/* <Icon name="search" size={20} color="#000" /> */}
         </TextInput>
       </View>
-      {allData.map(movies => {
-        return (
-          <View key={movies.vote_count}>
-            <ResultCards
-              imgSrc={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
-              movieName={movies.original_title}
-              moviedesc="Action &#8226; Adventure &#8226; Drama"
-              year={moment(movies.release_date).format('YYYY')}
-              views={`${movies.vote_count} +`}
-              stars={`⭐${movies.vote_average}`}
-              duration="🕒 3h 01min"
-            />
-          </View>
-        );
-      })}
+      {loading === false ? (
+        <ScrollView>
+          {allData.map(movies => {
+            return (
+              <View key={movies.id}>
+                <ResultCards
+                  imgSrc={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
+                  movieName={movies.original_title}
+                  moviedesc="Action &#8226; Adventure &#8226; Drama"
+                  year={moment(movies.release_date).format('YYYY')}
+                  views={`${movies.vote_count} +`}
+                  stars={`⭐${movies.vote_average}`}
+                  duration="🕒 3h 01min"
+                />
+              </View>
+            );
+          })}
+        </ScrollView>
+      ) : (
+        <View>
+          {searchData.map(movies => {
+            return (
+              <View key={movies.id}>
+                <ResultCards
+                  imgSrc={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
+                  movieName={movies.original_title}
+                  moviedesc="Action &#8226; Adventure &#8226; Drama"
+                  year={moment(movies.release_date).format('YYYY')}
+                  views={`${movies.vote_count} +`}
+                  stars={`⭐${movies.vote_average}`}
+                  duration="🕒 3h 01min"
+                />
+              </View>
+            );
+          })}
+        </View>
+      )}
     </ScrollView>
   );
 }
