@@ -47,6 +47,13 @@ function Home({navigation}) {
           onPress={() => navigation.navigate('WatchHistory')}>
           <Text style={styles.btn}>Watch History</Text>
         </TouchableOpacity>
+        <View style={styles.reviewWrapper}>
+          <TouchableOpacity
+            activeOpacity={0.6}
+            onPress={() => navigation.navigate('ReviewForm')}>
+            <Text style={styles.reviews}>Add movie review</Text>
+          </TouchableOpacity>
+        </View>
       </ImageBackground>
     </View>
   );
@@ -82,6 +89,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     color: '#f08989',
     borderRadius: 6,
+  },
+  reviewWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  reviews: {
+    color: '#fff',
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginHorizontal: 20,
   },
 });
 export default Home;

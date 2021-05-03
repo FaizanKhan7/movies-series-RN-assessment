@@ -8,6 +8,7 @@ import TvShows from './screens/TvShows';
 import Featured from './screens/Featured';
 import TopMovies from './screens/TopMovies';
 import WatchHistory from './screens/WatchHistory';
+import ReviewForm from './screens/ReviewForm';
 const Stack = createStackNavigator();
 
 function App() {
@@ -43,6 +44,11 @@ function App() {
           options={{headerShown: false}}
           name="WatchHistory"
           component={WatchHistory}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="ReviewForm"
+          component={ReviewForm}
         />
       </Stack.Navigator>
     </NavigationContainer>
