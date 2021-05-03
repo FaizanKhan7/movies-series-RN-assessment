@@ -26,12 +26,24 @@ const reviewSchema = Yup.object({
 
 function Reviews({navigation}) {
   const [reviews, setReviews] = useState([
-    // {
-    //   movieTitle: 'Tenet',
-    //   rating: 9,
-    //   thoughtsOnMovie: 'A great moive by christoper nolan',
-    //   key: '1',
-    // },
+    {
+      movieTitle: 'Tenet',
+      rating: 9,
+      thoughtsOnMovie: 'A great moive by christoper nolan',
+      key: '1',
+    },
+    {
+      movieTitle: 'Tenet',
+      rating: 9,
+      thoughtsOnMovie: 'A great moive by christoper nolan',
+      key: '2',
+    },
+    {
+      movieTitle: 'Tenet',
+      rating: 9,
+      thoughtsOnMovie: 'A great moive by christoper nolan',
+      key: '3',
+    },
   ]);
 
   const addReview = review => {
@@ -51,7 +63,7 @@ function Reviews({navigation}) {
             style={styles.icon}
             onPress={() => navigation.navigate('Home')}
           />
-          <Text style={styles.title}>Add movies reviews </Text>
+          <Text style={styles.title}>Add movie reviews </Text>
         </View>
         <View>
           <Formik
@@ -80,7 +92,7 @@ function Reviews({navigation}) {
                   multiline
                   minHeight={80}
                   style={styles.input}
-                  placeholder="Write something about your movie"
+                  placeholder="Write something about the movie"
                   onChangeText={formikProps.handleChange('thoughtsOnMovie')}
                   value={formikProps.values.thoughtsOnMovie}
                   onBlur={formikProps.handleBlur('thoughtsOnMovie')}
@@ -184,7 +196,7 @@ const styles = StyleSheet.create({
   errorText: {
     color: 'red',
     fontWeight: 'bold',
-    marginBottom: 5,
+    marginBottom: 6,
     marginLeft: 5,
   },
 });
