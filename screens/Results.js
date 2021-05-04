@@ -12,6 +12,7 @@ function Results({navigation}) {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchData, setSearchData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
 
   // const handleChange = event => {
   //   setSearchTerm(event);
@@ -72,8 +73,17 @@ function Results({navigation}) {
       </View>
       <View style={styles.searchbar}>
         <TextInput
+          style={[
+            styles.input,
+            isFocused && {
+              borderWidth: 2,
+              borderColor: '#f08989',
+              backgroundColor: '#fff',
+            },
+          ]}
+          onBlur={() => setIsFocused(false)}
+          onFocus={() => setIsFocused(true)}
           placeholder="Avengers"
-          style={styles.input}
           value={searchQuery}
           onChangeText={text => {
             setSearchQuery(text);
@@ -155,7 +165,7 @@ const styles = StyleSheet.create({
   input: {
     fontSize: 18,
     color: '#000',
-    backgroundColor: 'lightgray',
+    backgroundColor: '#e5e5e5',
     borderColor: '#bdbdbd',
     borderRadius: 20,
     borderWidth: 2,
